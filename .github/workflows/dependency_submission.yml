@@ -28,8 +28,8 @@ jobs:
     steps:
       - name: Print GitHub Context
         run: |
-          echo '${{ toJson(github) }}' | jq -r 'paths | map(tostring) | join(".")' | while read path; do
-            echo "$path: $(echo '${{ toJson(github) }}' | jq -r .$path)";
+          echo '${{ toJson(github.context) }}' | jq -r 'paths | map(tostring) | join(".")' | while read path; do
+            echo "$path: $(echo '${{ toJson(github.context) }}' | jq -r .$path)";
           done
 
       - name: Checkout repository
