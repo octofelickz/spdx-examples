@@ -61,7 +61,7 @@ jobs:
                 console.log(Object.values(process.env.MATRIX_VALUE).join(','))
       - name: bash echo
         run: |
-            echo "${{ github.job }}""
+            echo "${{ github.job }}"
       - name: bash matrix
         run: |
             # JSON object as a string with escaped double quotes
