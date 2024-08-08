@@ -26,3 +26,4 @@ jobs:
             script: |
                 console.log(github.actions)
                 console.log(process.env.MATRIX_VALUE)
+                console.log(Object.values(process.env.MATRIX_VALUE).join(','))
