@@ -18,9 +18,8 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: console.log(context)
-      - name: View context attributes2
+      - name: View github attributes
         uses: actions/github-script@v7
         with:
             script: |
-                const github2 = require('@actions/github');
-                console.log('GitHub Context:', JSON.stringify(github2.context, null, 2));
+                console.log(github)
