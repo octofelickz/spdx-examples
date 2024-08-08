@@ -35,10 +35,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Format corrleator as "job(matrixvalue1, matrixvalue2, ... )" or just "job" with a null matrix
+      - name: Define correlator
+        id: matrix_parser
+        run: |
+            correlator=$(echo '${{ toJSON(matrix) }}' | jq -r 'if . == null then "${{ github.job }}" else "${{ github.job }}(" + ([.[] | tostring] | join(", ")) + ")" end')
+            echo "correlator=$correlator" >> $GITHUB_OUTPUT
+
       - name: SBOM upload
-        uses: advanced-security/spdx-dependency-submission-action@v0.1.1
+        uses: advanced-security/spdx-dependency-submission-action@input-correlator
         with:
           filePath: "${{ matrix.sbom }}"
+          correlator: ${{ steps.matrix_parser.outputs.correlator }}
 
       # - name: Validate SPDX 3.0 Documents
       #   run: |
