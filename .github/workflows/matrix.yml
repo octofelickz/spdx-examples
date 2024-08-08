@@ -1,0 +1,24 @@
+name: SPDX Dependency Graph Snapshot Submission
+on:
+  - pull_request
+  - push
+  - workflow_dispatch
+
+
+
+jobs:
+  example_matrix:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, ubuntu-20.04]
+        version: [10, 12, 14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: View context attributes
+        uses: actions/github-script@v7
+        with:
+          script: console.log(context)
+      - name: View context attributes2
+        uses: actions/github-script@v7
+        with:
+            script:   console.log('GitHub Context:', JSON.stringify(github.context, null, 2));
