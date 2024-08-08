@@ -38,3 +38,11 @@ jobs:
             # Output: ubuntu-22.04,10
             echo "$result"
 
+            #TEst2
+            result=$(echo '${{ toJSON(matrix) }}' | jq -r '[.[] | tostring] | join(",")'); echo "$result"
+
+            #test3
+            echo $(echo '${{ toJSON(matrix) }}' | jq -r '[.[] | tostring] | join(",")')
+
+
+
