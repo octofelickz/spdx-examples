@@ -21,7 +21,7 @@ jobs:
       - name: View github attributes
         uses: actions/github-script@v7
         env:
-            MATRIX_VALUE: '${{ matrix }}'
+            MATRIX_VALUE: '${{ toJSON(matrix) }}'
         with:
             script: |
                 console.log(github.actions)
