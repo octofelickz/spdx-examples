@@ -27,3 +27,8 @@ jobs:
                 console.log(github.actions)
                 console.log(process.env.MATRIX_VALUE)
                 console.log(Object.values(process.env.MATRIX_VALUE).join(','))
+      - name: bash matrix
+        run: |
+            result=$(echo "${{ matrix }}" | jq -r '[.[]] | @csv')
+            echo "$result"
+
