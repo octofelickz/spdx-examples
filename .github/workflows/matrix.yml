@@ -1,4 +1,4 @@
-name: SPDX Dependency Graph Snapshot Submission
+name: Test Matrix
 on:
   - pull_request
   - push
