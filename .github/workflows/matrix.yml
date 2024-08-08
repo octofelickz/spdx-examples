@@ -29,6 +29,12 @@ jobs:
                 console.log(Object.values(process.env.MATRIX_VALUE).join(','))
       - name: bash matrix
         run: |
-            result=$(echo "${{ toJSON(matrix) }}" | jq -r '[.[]] | @csv')
+            # JSON object as a string with escaped double quotes
+            json='${{ toJSON(matrix) }}'
+
+            # Extract values and join them with a comma
+            result=$(echo "$json" | jq -r '[.[]] | @csv')
+
+            # Output: ubuntu-22.04,10
             echo "$result"
 
