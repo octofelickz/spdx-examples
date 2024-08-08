@@ -65,15 +65,15 @@ jobs:
             json='${{ toJSON(matrix) }}'
 
             # Extract values and join them with a comma, removing double quotes
-            result=$(echo "$json" | jq -r 'if . == null then "null" else [.[] | tostring] | join(",") end')
+            result=$(echo "$json" | jq -r 'if . == null then "" else [.[] | tostring] | join(",") end')
 
             # Output: ubuntu-22.04,10
             echo "$result"
 
             #TEst2
-            result=$(echo '${{ toJSON(matrix) }}' | jq -r 'if . == null then "null" else [.[] | tostring] | join(",") end'); echo "$result"
+            result=$(echo '${{ toJSON(matrix) }}' | jq -r 'if . == null then "" else [.[] | tostring] | join(",") end'); echo "$result"
 
             #test3
-            echo $(echo '${{ toJSON(matrix) }}' | jq -r 'if . == null then "null" else [.[] | tostring] | join(",") end')
+            echo $(echo '${{ toJSON(matrix) }}' | jq -r 'if . == null then "" else [.[] | tostring] | join(",") end')
 
 
