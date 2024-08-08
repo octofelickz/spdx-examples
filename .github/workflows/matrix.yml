@@ -20,7 +20,9 @@ jobs:
           script: console.log(context)
       - name: View github attributes
         uses: actions/github-script@v7
+        env:
+            MATRIX_VALUE: '${{ matrix }}'
         with:
             script: |
                 console.log(github.actions)
-                console.log(process.env.GITHUB_MATRIX)
+                console.log(process.env.MATRIX_VALUE)
