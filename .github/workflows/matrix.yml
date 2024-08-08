@@ -79,4 +79,7 @@ jobs:
             #test3
             echo $(echo '${{ toJSON(matrix) }}' | jq -r 'if . == null then "" else [.[] | tostring] | join(",") end')
 
+            #final
+            echo $(echo '${{ toJSON(matrix) }}' | jq -r 'if . == null then "${{ github.job }}" else "${{ github.job }}(" + ([.[] | tostring] | join(",")) + ")" end')
+
 
