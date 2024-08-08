@@ -32,8 +32,8 @@ jobs:
             # JSON object as a string with escaped double quotes
             json='${{ toJSON(matrix) }}'
 
-            # Extract values and join them with a comma
-            result=$(echo "$json" | jq -r '[.[]] | @csv')
+            # Extract values and join them with a comma, removing double quotes
+            result=$(echo "$json" | jq -r '[.[]] | join(",")')
 
             # Output: ubuntu-22.04,10
             echo "$result"
