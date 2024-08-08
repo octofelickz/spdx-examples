@@ -43,6 +43,11 @@ jobs:
 
             #test3
             echo $(echo '${{ toJSON(matrix) }}' | jq -r '[.[] | tostring] | join(",")')
+
+            #final
+            echo $(echo '${{ toJSON(matrix) }}' | jq -r 'if . == null then "${{ github.job }}" else "${{ github.job }}(" + ([.[] | tostring] | join(",")) + ")" end')
+
+
   example_nomatrix:
     runs-on: ubuntu-latest
     steps:
