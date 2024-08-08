@@ -43,6 +43,37 @@ jobs:
 
             #test3
             echo $(echo '${{ toJSON(matrix) }}' | jq -r '[.[] | tostring] | join(",")')
+  example_nomatrix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: View context attributes
+        uses: actions/github-script@v7
+        with:
+          script: console.log(context)
+      - name: View github attributes
+        uses: actions/github-script@v7
+        env:
+            MATRIX_VALUE: '${{ toJSON(matrix) }}'
+        with:
+            script: |
+                console.log(github.actions)
+                console.log(process.env.MATRIX_VALUE)
+                console.log(Object.values(process.env.MATRIX_VALUE).join(','))
+      - name: bash matrix
+        run: |
+            # JSON object as a string with escaped double quotes
+            json='${{ toJSON(matrix) }}'
 
+            # Extract values and join them with a comma, removing double quotes
+            result=$(echo "$json" | jq -r '[.[]] | join(",")')
+
+            # Output: ubuntu-22.04,10
+            echo "$result"
+
+            #TEst2
+            result=$(echo '${{ toJSON(matrix) }}' | jq -r '[.[] | tostring] | join(",")'); echo "$result"
+
+            #test3
+            echo $(echo '${{ toJSON(matrix) }}' | jq -r '[.[] | tostring] | join(",")')
 
 
