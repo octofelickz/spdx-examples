@@ -1,8 +1,10 @@
 name: SPDX Dependency Graph Snapshot Submission
 on:
-  - pull_request
-  - push
-  - workflow_dispatch
+  pull_request:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '31 5 * * 2'
 
 jobs:
   find-sboms:
